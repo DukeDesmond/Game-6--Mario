@@ -13,6 +13,7 @@ var checked_surrounding : bool = false
 var speed : float = 75
 var direction : int = -1
 var life : int = 1
+var player: CharacterBody2D = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -65,6 +66,7 @@ func _on_time_slice_timeout() -> void:
 
 
 func _on_line_of_sight_area_body_entered(body: Node2D) -> void:
+	behavior_timer.stop()
 	animation_tree["parameters/playback"].travel("run")
 	speed = 350
 
@@ -72,8 +74,18 @@ func _on_line_of_sight_area_body_exited(body: Node2D) -> void:
 	behavior_timer.start()
 
 func _on_behavior_timer_timeout() -> void:
-	animation_tree["parameters/playback"].travel("move")
-	speed = 75
+	 #animation_tree.get("parameters/playback").get_current_node()
+	if animation_tree.get("parameters/playback").get_current_node() == "run":
+		animation_tree["parameters/playback"].travel("move")
+		speed = 75
+	
+	elif animation_tree.get("parameters/playback").get_current_node() == "move":
+		animation_tree["parameters/playback"].travel("idle")
+		speed = 0
+	
+	elif animation_tree.get("parameters/playback").get_current_node() == "idle":
+		animation_tree["parameters/playback"].travel("move")
+		speed = 75
 	
 func death():
 		life -=1
@@ -86,3 +98,6 @@ func death():
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name =="death":
 		queue_free()
+
+func add_player(character:CharacterBody2D):
+	player = character

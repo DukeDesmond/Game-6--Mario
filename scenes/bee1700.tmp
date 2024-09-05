@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://2mrl5uao2fmq"]
+[gd_scene load_steps=26 format=3 uid="uid://2mrl5uao2fmq"]
 
 [ext_resource type="Script" path="res://scripts/bee.gd" id="1_3keku"]
 [ext_resource type="Texture2D" uid="uid://cw2wgpghek3r" path="res://assets/Anokolisa's Legacy-Fantasy - High Forest 2.3/Mob/Small Bee/Fly/Fly-Sheet.png" id="1_n7waa"]
@@ -407,9 +407,6 @@ transitions = ["Start", "fly", SubResource("AnimationNodeStateMachineTransition_
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y4fi8"]
 size = Vector2(9, 13)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_nmbnu"]
-radius = 135.0
-
 [node name="Bee" type="CharacterBody2D"]
 script = ExtResource("1_3keku")
 
@@ -443,11 +440,4 @@ shape = SubResource("RectangleShape2D_y4fi8")
 wait_time = 3.0
 autostart = true
 
-[node name="CircleOfSight" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CircleOfSight"]
-shape = SubResource("CircleShape2D_nmbnu")
-
 [connection signal="timeout" from="BehaviorTimer" to="." method="_on_behavior_timer_timeout"]
-[connection signal="body_entered" from="CircleOfSight" to="." method="_on_circle_of_sight_body_entered"]
-[connection signal="body_exited" from="CircleOfSight" to="." method="_on_circle_of_sight_body_exited"]

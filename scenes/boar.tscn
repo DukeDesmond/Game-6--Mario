@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://b8hqqtascfl6r"]
+[gd_scene load_steps=32 format=3 uid="uid://b8hqqtascfl6r"]
 
 [ext_resource type="Script" path="res://scripts/boar.gd" id="1_j4m3b"]
 [ext_resource type="Texture2D" uid="uid://cbu2b1h3lsacu" path="res://assets/Anokolisa's Legacy-Fantasy - High Forest 2.3/Mob/Boar/Idle/Idle-Sheet-export-Back.png" id="1_ylip4"]
@@ -13,7 +13,7 @@ size = Vector2(24, 23)
 size = Vector2(40, 27)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t4wra"]
-size = Vector2(135, 1.5)
+size = Vector2(125, 1.5)
 
 [sub_resource type="Animation" id="Animation_8o7bn"]
 length = 0.001
@@ -257,22 +257,20 @@ _data = {
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ddytk"]
 animation = &"death"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rfiai"]
+animation = &"idle"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h2ep7"]
 animation = &"walk"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1vopc"]
 animation = &"walk"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_06pkw"]
-animation = &"idle"
-
 [sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_dkmj4"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_h2ep7")
 blend_point_0/pos = -1.0
 blend_point_1/node = SubResource("AnimationNodeAnimation_1vopc")
 blend_point_1/pos = 1.0
-blend_point_2/node = SubResource("AnimationNodeAnimation_06pkw")
-blend_point_2/pos = 0.0
 blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hl5d4"]
@@ -289,17 +287,29 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5t6ir"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hqwe5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_se2mh"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vs6iy"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tpbqx"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nqpon"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_hx5qt"]
 states/End/position = Vector2(608, 131)
-states/Start/position = Vector2(198, 131)
+states/Start/position = Vector2(123, 166)
 states/death/node = SubResource("AnimationNodeAnimation_ddytk")
-states/death/position = Vector2(505, 133)
+states/death/position = Vector2(521, 166)
+states/idle/node = SubResource("AnimationNodeAnimation_rfiai")
+states/idle/position = Vector2(301, 57)
 states/move/node = SubResource("AnimationNodeBlendSpace1D_dkmj4")
-states/move/position = Vector2(358, 131)
+states/move/position = Vector2(301, 166)
 states/run/node = SubResource("AnimationNodeAnimation_hl5d4")
-states/run/position = Vector2(431, 48)
-transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_071rb"), "run", "move", SubResource("AnimationNodeStateMachineTransition_h3rwb"), "move", "run", SubResource("AnimationNodeStateMachineTransition_5espk"), "move", "death", SubResource("AnimationNodeStateMachineTransition_wqtgf"), "run", "death", SubResource("AnimationNodeStateMachineTransition_5t6ir")]
-graph_offset = Vector2(-135, 11)
+states/run/position = Vector2(521, 57)
+transitions = ["Start", "move", SubResource("AnimationNodeStateMachineTransition_071rb"), "run", "move", SubResource("AnimationNodeStateMachineTransition_h3rwb"), "move", "run", SubResource("AnimationNodeStateMachineTransition_5espk"), "move", "death", SubResource("AnimationNodeStateMachineTransition_wqtgf"), "run", "death", SubResource("AnimationNodeStateMachineTransition_5t6ir"), "move", "idle", SubResource("AnimationNodeStateMachineTransition_hqwe5"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_se2mh"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_vs6iy"), "idle", "move", SubResource("AnimationNodeStateMachineTransition_tpbqx"), "idle", "death", SubResource("AnimationNodeStateMachineTransition_nqpon")]
+graph_offset = Vector2(-174, 7)
 
 [node name="Boar" type="CharacterBody2D"]
 script = ExtResource("1_j4m3b")
@@ -321,7 +331,7 @@ shape = SubResource("RectangleShape2D_ua6ah")
 [node name="LineOfSightArea" type="Area2D" parent="."]
 
 [node name="LineOfSightBox" type="CollisionShape2D" parent="LineOfSightArea"]
-position = Vector2(-80.5, 1.25)
+position = Vector2(-85.5, 1.25)
 shape = SubResource("RectangleShape2D_t4wra")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -333,10 +343,11 @@ libraries = {
 active = false
 tree_root = SubResource("AnimationNodeStateMachine_hx5qt")
 anim_player = NodePath("../AnimationPlayer")
-parameters/move/blend_position = 0
+parameters/move/blend_position = 0.0
 
 [node name="BehaviorTimer" type="Timer" parent="."]
 wait_time = 1.5
+autostart = true
 
 [node name="RayCastWall" type="RayCast2D" parent="."]
 position = Vector2(-16, 0)

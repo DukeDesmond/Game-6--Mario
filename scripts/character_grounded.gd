@@ -13,10 +13,12 @@ func exit():
 	pass
 	
 func state_process(delta):
-	if !player.is_on_floor():
+	if player.life <= 0:
+		transitioned.emit(self,"Death")
+	
+	elif !player.is_on_floor():
 		playback.travel("in_air")
 		transitioned.emit(self,"Airborne")
-		
 
 func state_physics_process(delta):
 	pass
@@ -35,3 +37,15 @@ func state_jump():
 	
 func attack():
 	transitioned.emit(self, "Attack")
+
+
+func _on_player_area_2d_body_entered(body: Node2D) -> void:
+	if body.has_method("add_player"):
+		var dir =  player.global_position.direction_to(body.global_position).x
+		if dir < 0:
+			dir = -1
+		else:
+			dir = 1
+		player.velocity = Vector2(-dir * 200,-100)
+		player.knockback = true
+		player.hit()

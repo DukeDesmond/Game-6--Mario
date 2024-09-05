@@ -20,7 +20,8 @@ func exit():
 	sword_hit_box.disabled = true
 	
 func state_process(delta):
-	pass
+	if player.life <= 0:
+		transitioned.emit(self,"Death")
 	
 
 func state_physics_process(delta):

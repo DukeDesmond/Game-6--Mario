@@ -10,11 +10,11 @@ class_name snail extends CharacterBody2D
 @onready var snail_shape_2d: CollisionShape2D = $SnailShape2D
 
 const SPEED = 25
-var life : int  = 1
 
+var life : int  = 1
 var checked_surrounding : bool = false
 var direction : int = -1
-
+var player: CharacterBody2D = null
 
 func _ready() -> void:
 	animation_tree.active = true
@@ -36,7 +36,6 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 		
 	velocity.x = direction * SPEED
-	
 
 	update_animation()
 	move_and_slide()
@@ -61,15 +60,12 @@ func update_facing_direction():
 		ray_cast_wall.target_position *= -1
 		line_of_sight_box.position *= -1
 
-
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
-		pass
+		body.hit()
 
 func _on_behavior_timer_timeout() -> void:
 	animation_tree["parameters/playback"].travel("unhide")
-
-
 
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "unhide":
@@ -89,9 +85,13 @@ func death():
 			direction = 0
 			animation_tree["parameters/playback"].travel("death")
 
-
 func _on_line_of_sight_area_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		animation_tree["parameters/playback"].travel("hide")
-		behavior_timer.start()
 		direction = 0
+
+func _on_line_of_sight_area_body_exited(body: Node2D) -> void:
+	behavior_timer.start()
+
+func add_player(character:CharacterBody2D):
+	player = character
