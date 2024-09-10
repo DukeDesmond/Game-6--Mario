@@ -14,7 +14,7 @@ const JUMP_VELOCITY = -400.0
 var animation_locked : bool = false
 var direction : Vector2 = Vector2.ZERO
 var can_move : bool = true
-var life : int = 1
+var life : int = 3
 var knockback : bool = false
 var dead = false
 
