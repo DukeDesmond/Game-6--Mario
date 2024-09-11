@@ -347,6 +347,7 @@ texture = ExtResource("1_yiji0")
 hframes = 8
 
 [node name="SnailShape2D" type="CollisionShape2D" parent="."]
+visibility_layer = 3
 position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_gbtpe")
 
@@ -371,6 +372,7 @@ parameters/move/blend_position = 1.0
 position = Vector2(0, 2)
 rotation = 1.5708
 target_position = Vector2(1.18021e-06, 27)
+collision_mask = 3
 
 [node name="RayCastFloor" type="RayCast2D" parent="."]
 position = Vector2(-20, 0)
@@ -384,6 +386,8 @@ autostart = true
 wait_time = 2.0
 
 [node name="LineOfSightArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
 
 [node name="LineOfSightBox" type="CollisionShape2D" parent="LineOfSightArea"]
 position = Vector2(-86.5, -5)

@@ -9,11 +9,13 @@ extends CharacterBody2D
 @onready var line_of_sight_box: CollisionShape2D = $LineOfSightArea/LineOfSightBox
 @onready var boar_shape_2d: CollisionShape2D = $BoarShape2D
 
+
 var checked_surrounding : bool = false
 var speed : float = 75
 var direction : int = -1
 var life : int = 1
 var player: CharacterBody2D = null
+var dead : bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,7 +43,8 @@ func _physics_process(delta: float) -> void:
 	
 
 	update_animation()
-	move_and_slide()
+	if dead != true:
+		move_and_slide()
 	
 func update_facing_direction():
 	if direction < 0:
@@ -90,6 +93,7 @@ func _on_behavior_timer_timeout() -> void:
 func death():
 		life -=1
 		if life <= 0:
+			dead = true
 			boar_shape_2d.disabled = true
 			direction = 0
 			animation_tree["parameters/playback"].travel("death")

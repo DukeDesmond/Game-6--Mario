@@ -1,41 +1,95 @@
-[gd_scene load_steps=6 format=3 uid="uid://pdm4p6r2wqhg"]
+[gd_scene load_steps=7 format=3 uid="uid://pdm4p6r2wqhg"]
 
 [ext_resource type="PackedScene" uid="uid://cat7qbcb5d3na" path="res://scenes/player.tscn" id="1_qtuqf"]
-[ext_resource type="Texture2D" uid="uid://blmmogecautnp" path="res://icon.svg" id="2_8cnw7"]
+[ext_resource type="PackedScene" uid="uid://2k5rk2auyeq6" path="res://scenes/level_1.tscn" id="1_vlj8l"]
 [ext_resource type="PackedScene" uid="uid://j35p3vpiqcdp" path="res://scenes/enemy_manager.tscn" id="3_mxlbh"]
 [ext_resource type="PackedScene" uid="uid://b8hqqtascfl6r" path="res://scenes/boar.tscn" id="4_tbudm"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7rvr"]
-size = Vector2(128.573, 132)
+[ext_resource type="PackedScene" uid="uid://b05krlr2l2rrs" path="res://scenes/snail.tscn" id="5_sgjq5"]
+[ext_resource type="PackedScene" uid="uid://2mrl5uao2fmq" path="res://scenes/bee.tscn" id="6_dws65"]
 
 [node name="Game" type="Node2D"]
 
+[node name="Level1" parent="." instance=ExtResource("1_vlj8l")]
+
 [node name="Player" parent="." instance=ExtResource("1_qtuqf")]
-position = Vector2(519, 359)
+z_index = 1
+position = Vector2(73, -19)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(519, 359)
+position = Vector2(73, -19)
 zoom = Vector2(3, 3)
 process_callback = 0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 
-[node name="Icon" type="Sprite2D" parent="."]
-position = Vector2(604.5, 469)
-scale = Vector2(3.49219, 1)
-texture = ExtResource("2_8cnw7")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Icon"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Icon/StaticBody2D"]
-position = Vector2(0.572754, -1)
-shape = SubResource("RectangleShape2D_j7rvr")
-
 [node name="EnemyManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_mxlbh")]
 player = NodePath("../Player")
 
-[node name="Boar" parent="." instance=ExtResource("4_tbudm")]
-position = Vector2(797, 375)
+[node name="Snail" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
+position = Vector2(276, -15)
+
+[node name="Bee" parent="EnemyManager" instance=ExtResource("6_dws65")]
+position = Vector2(825, -151)
+
+[node name="Bee2" parent="EnemyManager" instance=ExtResource("6_dws65")]
+position = Vector2(667, -146)
+
+[node name="Bee3" parent="EnemyManager" instance=ExtResource("6_dws65")]
+position = Vector2(743, -221)
+
+[node name="Boar" parent="EnemyManager" instance=ExtResource("4_tbudm")]
+position = Vector2(617, -80)
+
+[node name="Boar2" parent="EnemyManager" instance=ExtResource("4_tbudm")]
+position = Vector2(1224, -33)
+
+[node name="Snail2" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
+position = Vector2(845, -32)
+
+[node name="Boar3" parent="EnemyManager" instance=ExtResource("4_tbudm")]
+position = Vector2(1642, 1)
+
+[node name="Snail3" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
+position = Vector2(1757, -143)
+
+[node name="Snail4" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
+position = Vector2(2156, -273)
+
+[node name="Bee4" parent="EnemyManager" instance=ExtResource("6_dws65")]
+position = Vector2(1877, -302)
+
+[node name="Bee5" parent="EnemyManager" instance=ExtResource("6_dws65")]
+position = Vector2(1318, -173)
+
+[node name="Boar4" parent="EnemyManager" instance=ExtResource("4_tbudm")]
+position = Vector2(2390, -357)
+
+[node name="Bee6" parent="EnemyManager" instance=ExtResource("6_dws65")]
+position = Vector2(2255, -507)
+
+[node name="Snail5" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
+position = Vector2(2666, -482)
+
+[node name="Bee7" parent="EnemyManager" instance=ExtResource("6_dws65")]
+position = Vector2(1971, -25)
+
+[node name="Boar5" parent="EnemyManager" instance=ExtResource("4_tbudm")]
+position = Vector2(2359, 124)
+
+[node name="Boar6" parent="EnemyManager" instance=ExtResource("4_tbudm")]
+position = Vector2(2684, 126)
+
+[node name="Boar7" parent="EnemyManager" instance=ExtResource("4_tbudm")]
+position = Vector2(3003, 222)
+
+[node name="Snail6" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
+position = Vector2(3178, 223)
+
+[node name="Snail7" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
+position = Vector2(2809, 220)
+
+[node name="Snail8" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
+position = Vector2(3469, 235)
