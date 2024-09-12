@@ -17,8 +17,8 @@
 [ext_resource type="Script" path="res://scripts/character_death.gd" id="13_ajmnc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bwp5f"]
-radius = 6.0
-height = 38.0
+radius = 9.0
+height = 40.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h2nbi"]
 size = Vector2(25, 62)

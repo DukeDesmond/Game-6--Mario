@@ -32,13 +32,13 @@ player = NodePath("../Player")
 position = Vector2(276, -15)
 
 [node name="Bee" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(825, -151)
+position = Vector2(1073, -151)
 
 [node name="Bee2" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(667, -146)
+position = Vector2(755, -146)
 
 [node name="Bee3" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(743, -221)
+position = Vector2(976, -362)
 
 [node name="Boar" parent="EnemyManager" instance=ExtResource("4_tbudm")]
 position = Vector2(617, -80)
@@ -62,7 +62,7 @@ position = Vector2(2156, -273)
 position = Vector2(1877, -302)
 
 [node name="Bee5" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(1318, -173)
+position = Vector2(1548, -173)
 
 [node name="Boar4" parent="EnemyManager" instance=ExtResource("4_tbudm")]
 position = Vector2(2390, -357)
@@ -74,22 +74,7 @@ position = Vector2(2255, -507)
 position = Vector2(2666, -482)
 
 [node name="Bee7" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(1971, -25)
+position = Vector2(1286, -335)
 
-[node name="Boar5" parent="EnemyManager" instance=ExtResource("4_tbudm")]
-position = Vector2(2359, 124)
-
-[node name="Boar6" parent="EnemyManager" instance=ExtResource("4_tbudm")]
-position = Vector2(2684, 126)
-
-[node name="Boar7" parent="EnemyManager" instance=ExtResource("4_tbudm")]
-position = Vector2(3003, 222)
-
-[node name="Snail6" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
-position = Vector2(3178, 223)
-
-[node name="Snail7" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
-position = Vector2(2809, 220)
-
-[node name="Snail8" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
-position = Vector2(3469, 235)
+[node name="Bee8" parent="EnemyManager" instance=ExtResource("6_dws65")]
+position = Vector2(1400, -595)
