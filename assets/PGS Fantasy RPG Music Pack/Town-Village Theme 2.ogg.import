@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c7n6hkxx466qr"
+path="res://.godot/imported/Town-Village Theme 2.ogg-f3fe0c8cf2dee9385b708e9732d5fe59.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/PGS Fantasy RPG Music Pack/Town-Village Theme 2.ogg"
+dest_files=["res://.godot/imported/Town-Village Theme 2.ogg-f3fe0c8cf2dee9385b708e9732d5fe59.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

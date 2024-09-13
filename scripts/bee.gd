@@ -1,5 +1,7 @@
 class_name bee extends CharacterBody2D
 
+
+
 @onready var behavior_timer: Timer = $BehaviorTimer
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -10,6 +12,7 @@ class_name bee extends CharacterBody2D
 
 const SPEED : int = 50
 
+var score_label : Label
 var vector : Vector2 = Vector2.ZERO
 var chase: bool = false
 var player: CharacterBody2D = null
@@ -27,7 +30,7 @@ func _process(delta: float) -> void:
 	bee_sight_2d.disabled = false
 	
 func _physics_process(delta: float) -> void:
-	if chase:
+	if chase == true and player.dead == false:
 		vector = position.direction_to(player.position)
 	
 	velocity += vector * SPEED * delta
@@ -70,7 +73,7 @@ func _on_circle_of_sight_body_exited(body: Node2D) -> void:
 func death():
 		life -=1
 		if life <= 0:
-
+			score_label.add_score(200)
 			dead = true
 			animation_tree["parameters/playback"].travel("death")
 

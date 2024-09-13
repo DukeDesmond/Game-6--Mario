@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1dair77gqaqt"]
+
+[ext_resource type="Script" path="res://scripts/winzone.gd" id="1_t8st3"]
+[ext_resource type="FontFile" uid="uid://bgrru6aim86x3" path="res://assets/Brackeys Platformer Assets/fonts/PixelOperator8-Bold.ttf" id="2_c3ccw"]
+
+[node name="Winzone" type="Area2D"]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("1_t8st3")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -57.0
+offset_top = -92.0
+offset_right = 57.0
+offset_bottom = -69.0
+theme_override_fonts/font = ExtResource("2_c3ccw")
+text = "Goal"
+horizontal_alignment = 1
+
+[node name="Restart" type="Button" parent="."]
+offset_left = -58.0
+offset_top = -73.0
+offset_right = 58.0
+offset_bottom = -49.0
+theme_override_fonts/font = ExtResource("2_c3ccw")
+text = "Restart"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="pressed" from="Restart" to="." method="_on_restart_pressed"]

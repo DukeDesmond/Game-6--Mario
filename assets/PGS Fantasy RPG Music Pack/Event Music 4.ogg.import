@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b5fghgf4ox76a"
+path="res://.godot/imported/Event Music 4.ogg-4a7d927b592a91b688406426ce1d9165.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/PGS Fantasy RPG Music Pack/Event Music 4.ogg"
+dest_files=["res://.godot/imported/Event Music 4.ogg-4a7d927b592a91b688406426ce1d9165.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

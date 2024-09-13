@@ -1,5 +1,6 @@
 class_name snail extends CharacterBody2D
 
+
 @onready var ray_cast_floor: RayCast2D = $RayCastFloor
 @onready var ray_cast_wall: RayCast2D = $RayCastWall
 @onready var animation_tree: AnimationTree = $AnimationTree
@@ -8,14 +9,16 @@ class_name snail extends CharacterBody2D
 @onready var behavior_timer: Timer = $BehaviorTimer
 @onready var line_of_sight_box: CollisionShape2D = $LineOfSightArea/LineOfSightBox
 @onready var snail_shape_2d: CollisionShape2D = $SnailShape2D
+@onready var area_shape_2d: CollisionShape2D = $Area2D/AreaShape2D
 
 const SPEED = 25
 
+var score_label : Label
 var life : int  = 1
 var checked_surrounding : bool = false
 var direction : int = -1
 var player: CharacterBody2D = null
-
+var dead : bool = false
 func _ready() -> void:
 	animation_tree.active = true
 
@@ -38,7 +41,8 @@ func _physics_process(delta: float) -> void:
 	velocity.x = direction * SPEED
 
 	update_animation()
-	move_and_slide()
+	if dead == false:
+		move_and_slide()
 	
 func _on_time_slice_timeout() -> void:
 	checked_surrounding = false
@@ -60,9 +64,9 @@ func update_facing_direction():
 		ray_cast_wall.target_position *= -1
 		line_of_sight_box.position *= -1
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "Player":
-		body.hit()
+#func _on_area_2d_body_entered(body: Node2D) -> void:
+	#if body.name == "Player":
+		#body.hit()
 
 func _on_behavior_timer_timeout() -> void:
 	animation_tree["parameters/playback"].travel("unhide")
@@ -81,7 +85,9 @@ func death():
 	if animation_tree["parameters/playback"].get_current_node() == "move":
 		life -=1
 		if life <= 0:
+			dead = true
 			snail_shape_2d.disabled = true
+			score_label.add_score(50)
 			direction = 0
 			animation_tree["parameters/playback"].travel("death")
 

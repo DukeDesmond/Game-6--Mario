@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cat7qbcb5d3na"]
+[gd_scene load_steps=58 format=3 uid="uid://cat7qbcb5d3na"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_12r6i"]
 [ext_resource type="Texture2D" uid="uid://c3evhgs6hihl4" path="res://assets/Anokolisa's Legacy-Fantasy - High Forest 2.3/Character/Idle/Idle-Sheet.png" id="1_15kvt"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://scripts/character_attack.gd" id="11_4tm53"]
 [ext_resource type="Script" path="res://scripts/debug_label.gd" id="11_e0mpd"]
 [ext_resource type="Script" path="res://scripts/character_death.gd" id="13_ajmnc"]
+[ext_resource type="AudioStream" uid="uid://ciuhypgevrkpn" path="res://sound/442903__qubodup__slash.wav" id="16_4uojt"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bwp5f"]
 radius = 9.0
@@ -667,8 +668,9 @@ script = ExtResource("8_brjt4")
 [node name="Airborne" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("9_72217")
 
-[node name="Attack" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("sword_hit_box")]
+[node name="Attack" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("audio_player", "sword_hit_box")]
 script = ExtResource("11_4tm53")
+audio_player = NodePath("../../AudioStreamPlayer2D")
 sword_hit_box = NodePath("../../SwordArea2d/SwordHitBox")
 
 [node name="Death" type="Node" parent="CharacterStateMachine"]
@@ -687,7 +689,20 @@ horizontal_alignment = 1
 script = ExtResource("11_e0mpd")
 status = NodePath("../CharacterStateMachine")
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_4uojt")
+volume_db = -7.0
+
+[node name="Retry" type="Button" parent="."]
+offset_left = -43.0
+offset_top = -66.0
+offset_right = 43.0
+offset_bottom = -42.0
+theme_override_fonts/font = ExtResource("10_yl02j")
+text = "Retry"
+
 [connection signal="body_entered" from="SwordArea2d" to="." method="_on_sword_area_2d_body_entered"]
 [connection signal="body_entered" from="PlayerArea2D" to="." method="_on_player_area_2d_body_entered"]
 [connection signal="body_entered" from="PlayerArea2D" to="CharacterStateMachine/Grounded" method="_on_player_area_2d_body_entered"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]

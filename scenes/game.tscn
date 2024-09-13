@@ -1,80 +1,379 @@
-[gd_scene load_steps=7 format=3 uid="uid://pdm4p6r2wqhg"]
+[gd_scene load_steps=14 format=3 uid="uid://pdm4p6r2wqhg"]
 
+[ext_resource type="AudioStream" uid="uid://b5fghgf4ox76a" path="res://assets/PGS Fantasy RPG Music Pack/Event Music 4.ogg" id="1_gr3kr"]
+[ext_resource type="FontFile" uid="uid://bgrru6aim86x3" path="res://assets/Brackeys Platformer Assets/fonts/PixelOperator8-Bold.ttf" id="1_i6sv6"]
 [ext_resource type="PackedScene" uid="uid://cat7qbcb5d3na" path="res://scenes/player.tscn" id="1_qtuqf"]
 [ext_resource type="PackedScene" uid="uid://2k5rk2auyeq6" path="res://scenes/level_1.tscn" id="1_vlj8l"]
 [ext_resource type="PackedScene" uid="uid://j35p3vpiqcdp" path="res://scenes/enemy_manager.tscn" id="3_mxlbh"]
+[ext_resource type="Script" path="res://scripts/score.gd" id="4_ldk4h"]
 [ext_resource type="PackedScene" uid="uid://b8hqqtascfl6r" path="res://scenes/boar.tscn" id="4_tbudm"]
 [ext_resource type="PackedScene" uid="uid://b05krlr2l2rrs" path="res://scenes/snail.tscn" id="5_sgjq5"]
 [ext_resource type="PackedScene" uid="uid://2mrl5uao2fmq" path="res://scenes/bee.tscn" id="6_dws65"]
+[ext_resource type="PackedScene" uid="uid://btgfis3fs6cya" path="res://scenes/coin.tscn" id="7_5vj7h"]
+[ext_resource type="Script" path="res://scripts/coin_managager.gd" id="9_4vbqj"]
+[ext_resource type="PackedScene" uid="uid://d1dair77gqaqt" path="res://scenes/winzone.tscn" id="11_4ndaq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l60i0"]
+size = Vector2(204.803, 173.617)
 
 [node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+z_index = 1
+position = Vector2(42.1046, 505)
+zoom = Vector2(3, 3)
+process_callback = 0
+limit_left = 0
+limit_top = -225
+limit_right = 3020
+limit_bottom = 585
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Scorelabel" type="Label" parent="CanvasLayer"]
+z_index = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 16.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_i6sv6")
+theme_override_font_sizes/font_size = 26
+text = "Score:"
+script = ExtResource("4_ldk4h")
 
 [node name="Level1" parent="." instance=ExtResource("1_vlj8l")]
 
 [node name="Player" parent="." instance=ExtResource("1_qtuqf")]
 z_index = 1
-position = Vector2(73, -19)
+position = Vector2(42.1046, 505)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
+update_rotation = false
+update_scale = false
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(73, -19)
-zoom = Vector2(3, 3)
-process_callback = 0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2(-42.1046, -505)
+stream = ExtResource("1_gr3kr")
+autoplay = true
+parameters/looping = true
 
-[node name="EnemyManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_mxlbh")]
+[node name="EnemyManager" parent="." node_paths=PackedStringArray("score_label", "player") instance=ExtResource("3_mxlbh")]
+score_label = NodePath("../CanvasLayer/Scorelabel")
 player = NodePath("../Player")
 
 [node name="Snail" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
-position = Vector2(276, -15)
+position = Vector2(276, 519)
 
 [node name="Bee" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(1073, -151)
+position = Vector2(1073, 383)
 
 [node name="Bee2" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(755, -146)
+position = Vector2(755, 388)
 
 [node name="Bee3" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(976, -362)
+position = Vector2(976, 172)
 
 [node name="Boar" parent="EnemyManager" instance=ExtResource("4_tbudm")]
-position = Vector2(617, -80)
+position = Vector2(617, 454)
 
 [node name="Boar2" parent="EnemyManager" instance=ExtResource("4_tbudm")]
-position = Vector2(1224, -33)
+position = Vector2(1224, 501)
 
 [node name="Snail2" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
-position = Vector2(845, -32)
+position = Vector2(845, 502)
 
 [node name="Boar3" parent="EnemyManager" instance=ExtResource("4_tbudm")]
-position = Vector2(1642, 1)
+position = Vector2(1642, 535)
 
 [node name="Snail3" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
-position = Vector2(1757, -143)
+position = Vector2(1757, 391)
 
 [node name="Snail4" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
-position = Vector2(2156, -273)
+position = Vector2(2156, 261)
 
 [node name="Bee4" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(1877, -302)
+position = Vector2(1877, 232)
 
 [node name="Bee5" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(1548, -173)
+position = Vector2(1548, 361)
 
 [node name="Boar4" parent="EnemyManager" instance=ExtResource("4_tbudm")]
-position = Vector2(2390, -357)
+position = Vector2(2390, 177)
 
 [node name="Bee6" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(2255, -507)
+position = Vector2(2255, 27)
 
 [node name="Snail5" parent="EnemyManager" instance=ExtResource("5_sgjq5")]
-position = Vector2(2666, -482)
+position = Vector2(2666, 52)
 
 [node name="Bee7" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(1286, -335)
+position = Vector2(1286, 199)
 
 [node name="Bee8" parent="EnemyManager" instance=ExtResource("6_dws65")]
-position = Vector2(1400, -595)
+position = Vector2(1400, -61)
+
+[node name="CoinManagager" type="Node2D" parent="." node_paths=PackedStringArray("score_label")]
+z_index = 1
+position = Vector2(0, 525)
+script = ExtResource("9_4vbqj")
+score_label = NodePath("../CanvasLayer/Scorelabel")
+
+[node name="Coin" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(31, -145)
+frame_progress = 0.952614
+
+[node name="Coin2" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(44, -145)
+
+[node name="Coin3" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(56, -145)
+
+[node name="Coin4" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(69, -145)
+
+[node name="Coin5" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(152, -17)
+
+[node name="Coin6" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(164, -17)
+
+[node name="Coin7" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(176, -17)
+
+[node name="Coin8" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(188, -17)
+
+[node name="Coin9" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(459, -77)
+
+[node name="Coin10" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(471, -77)
+
+[node name="Coin11" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(482, -77)
+
+[node name="Coin12" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(494, -77)
+
+[node name="Coin13" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(506, -77)
+
+[node name="Coin14" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(518, -77)
+
+[node name="Coin15" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(531, -77)
+
+[node name="Coin16" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(707, -130)
+
+[node name="Coin17" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(720, -108)
+
+[node name="Coin18" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(732, -130)
+
+[node name="Coin19" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(745, -108)
+
+[node name="Coin20" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(757, -130)
+
+[node name="Coin21" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(769, -108)
+
+[node name="Coin22" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(782, -130)
+
+[node name="Coin23" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(950, -57)
+
+[node name="Coin24" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(950, -68)
+
+[node name="Coin25" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(950, -79)
+
+[node name="Coin26" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(950, -151)
+
+[node name="Coin27" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(950, -162)
+
+[node name="Coin28" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(950, -174)
+
+[node name="Coin29" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(950, -250)
+
+[node name="Coin30" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(950, -262)
+
+[node name="Coin31" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(950, -274)
+
+[node name="Coin32" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1353, -572)
+
+[node name="Coin33" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1366, -550)
+
+[node name="Coin34" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1378, -572)
+
+[node name="Coin35" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1391, -550)
+
+[node name="Coin36" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1403, -572)
+
+[node name="Coin37" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1415, -550)
+
+[node name="Coin38" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1428, -572)
+
+[node name="Coin39" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1261, -365)
+
+[node name="Coin40" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1283, -376)
+
+[node name="Coin41" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1303, -387)
+
+[node name="Coin42" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1461, -424)
+
+[node name="Coin43" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1478, -437)
+
+[node name="Coin44" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1495, -449)
+
+[node name="Coin45" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1529, -501)
+
+[node name="Coin46" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1513, -513)
+
+[node name="Coin47" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1497, -525)
+
+[node name="Coin48" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1269, -101)
+
+[node name="Coin49" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1282, -79)
+
+[node name="Coin50" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1294, -101)
+
+[node name="Coin51" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1307, -79)
+
+[node name="Coin52" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1319, -101)
+
+[node name="Coin53" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1331, -79)
+
+[node name="Coin54" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1344, -101)
+
+[node name="Coin55" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1482, -2)
+
+[node name="Coin56" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1494, -2)
+
+[node name="Coin57" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1506, -2)
+
+[node name="Coin58" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1519, -2)
+
+[node name="Coin59" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1704, -90)
+
+[node name="Coin60" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1800, -173)
+
+[node name="Coin61" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1812, -173)
+
+[node name="Coin62" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1824, -173)
+
+[node name="Coin63" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1837, -173)
+
+[node name="Coin64" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1850, -173)
+
+[node name="Coin65" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1862, -173)
+
+[node name="Coin66" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(1874, -173)
+
+[node name="Coin67" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2069, -245)
+
+[node name="Coin68" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2084, -260)
+
+[node name="Coin69" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2098, -273)
+
+[node name="Coin70" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2114, -287)
+
+[node name="Coin71" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2126, -299)
+
+[node name="Coin72" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2139, -312)
+
+[node name="Coin73" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2237, -348)
+
+[node name="Coin74" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2250, -348)
+
+[node name="Coin75" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2262, -348)
+
+[node name="Coin76" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2275, -348)
+
+[node name="Coin77" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2288, -348)
+
+[node name="Coin78" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2301, -348)
+
+[node name="Coin79" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2314, -348)
+
+[node name="Coin80" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2484, -383)
+
+[node name="Coin81" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2497, -383)
+
+[node name="Coin82" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2510, -383)
+
+[node name="Coin83" parent="CoinManagager" instance=ExtResource("7_5vj7h")]
+position = Vector2(2523, -383)
+
+[node name="Winzone" parent="." instance=ExtResource("11_4ndaq")]
+position = Vector2(2881, -63)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Winzone"]
+position = Vector2(44.5986, -69.4249)
+shape = SubResource("RectangleShape2D_l60i0")

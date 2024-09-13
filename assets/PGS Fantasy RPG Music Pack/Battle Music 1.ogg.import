@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://4y1jr073towe"
+path="res://.godot/imported/Battle Music 1.ogg-4c13ef9b24bd1e8b490da3c7a6d42eaf.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/PGS Fantasy RPG Music Pack/Battle Music 1.ogg"
+dest_files=["res://.godot/imported/Battle Music 1.ogg-4c13ef9b24bd1e8b490da3c7a6d42eaf.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

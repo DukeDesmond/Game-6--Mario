@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var line_of_sight_box: CollisionShape2D = $LineOfSightArea/LineOfSightBox
 @onready var boar_shape_2d: CollisionShape2D = $BoarShape2D
 
-
+var score_label : Label
 var checked_surrounding : bool = false
 var speed : float = 75
 var direction : int = -1
@@ -93,6 +93,7 @@ func _on_behavior_timer_timeout() -> void:
 func death():
 		life -=1
 		if life <= 0:
+			score_label.add_score(200)
 			dead = true
 			boar_shape_2d.disabled = true
 			direction = 0
